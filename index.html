@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kumpulan Doa Saya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Same reading layout as "Saku Doa Umroh": sticky category bar, one card per doa, phone-first */
+:root{
+  --bg:#f3f5f2; --card:#ffffff; --fg:#1d2a26; --muted:#5d6b66; --line:#dde3df;
+  --accent:#0e5a4c; --accent-soft:#e2eee9; --gold:#9a7428;
+  --f-ar:"Amiri","Traditional Arabic","Scheherazade New",serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-disp:"Fraunces",Georgia,serif;
+  --ar-size:1.9rem;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1714; --card:#16211d; --fg:#e7eeea; --muted:#9aaba4; --line:#26342f;
+  --accent:#6cc4ae; --accent-soft:#1c2e28; --gold:#d6b46a; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:680px;margin:0 auto}
+header.top{padding-block:28px 12px}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{font-family:var(--f-disp);font-weight:600;font-size:2rem;line-height:1.15;margin:.25rem 0 .5rem;text-wrap:balance}
+.intro{color:var(--muted);margin:0;max-width:60ch}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid var(--line)}
+.bar-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.stages{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.stages::-webkit-scrollbar{display:none}
+.stages a{flex:none;text-decoration:none;color:var(--fg);background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:500;white-space:nowrap}
+.stages a.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tools button{font:inherit;font-size:.8rem;font-weight:600;color:var(--accent);background:var(--accent-soft);
+  border:0;border-radius:8px;padding:6px 10px;cursor:pointer}
+.tools button[aria-pressed="false"]{background:transparent;color:var(--muted);text-decoration:line-through}
+.tools input{flex:1;min-width:120px;font:inherit;font-size:.85rem;padding:6px 10px;border-radius:8px;
+  border:1px solid var(--line);background:var(--card);color:var(--fg)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+section.stage{scroll-margin-top:130px;padding-top:28px}
+.stage-h{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.stage-h .n{font-family:var(--f-disp);color:var(--gold);font-size:1.1rem}
+.stage-h h2{font-family:var(--f-disp);font-weight:600;font-size:1.35rem;margin:0}
+.stage-note{color:var(--muted);font-size:.9rem;margin:-4px 0 14px}
+
+.doa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;margin-bottom:14px}
+.doa-h{display:flex;gap:10px;align-items:flex-start}
+.doa h3{flex:1;font-size:1rem;font-weight:700;margin:0;color:var(--accent);letter-spacing:.01em}
+.copy{font:inherit;font-size:.75rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border:0;
+  border-radius:8px;padding:4px 10px;cursor:pointer;flex:none}
+.doa .when{font-size:.85rem;color:var(--muted);margin:.25rem 0 0}
+.part{margin-top:14px}
+.part + .part{border-top:1px dashed var(--line);padding-top:14px}
+.ar{font-family:var(--f-ar);font-size:var(--ar-size);line-height:2.1;direction:rtl;text-align:right;margin:.25rem 0 .5rem;word-spacing:.08em}
+.lat{font-style:italic;margin:.25rem 0 .5rem;font-size:.95rem}
+.tr{color:var(--muted);margin:.25rem 0 0;font-size:.95rem}
+.src{font-size:.8rem;color:var(--gold);margin-top:10px}
+body.no-lat .lat,body.no-tr .tr{display:none}
+.empty{color:var(--muted);text-align:center;padding:40px 0}
+footer{margin-top:32px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style></head><body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Catatan pribadi</div>
+    <h1>Kumpulan Doa Saya</h1>
+    <p class="intro">Doa-doa yang sedang saya hafalkan, lengkap dengan Arab, latin, dan artinya. Ketuk kategori untuk lompat, cari dengan kata kunci, atau salin doa dengan tombol Salin.</p>
+  </header>
+</div>
+
+<nav class="bar" aria-label="Kategori">
+  <div class="bar-inner">
+    <div class="stages" id="stages"></div>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Cari doa…" aria-label="Cari doa">
+      <button id="bLat" aria-pressed="true">Latin</button>
+      <button id="bTr" aria-pressed="true">Arti</button>
+      <button id="bMinus" aria-label="Perkecil huruf Arab">A−</button>
+      <button id="bPlus" aria-label="Perbesar huruf Arab">A+</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="main"></main>
+
+<div class="wrap"><footer>
+  <p>Teks Arab ayat Al-Qur'an dicocokkan dengan Qur'an Kemenag (quran.kemenag.go.id). Arti disusun mengikuti terjemahan Kemenag dan NU Online. Untuk kata-kata terjemahan resminya, lihat sumber yang tertulis di tiap doa.</p>
+</footer></div>
+
+<script>
+/* ===== DATA DOA =====
+   Untuk menambah doa: salin satu blok { t:..., parts:[...] } lalu ganti isinya.
+   Untuk menambah kategori: salin satu blok { id:..., stage:..., title:..., doas:[...] }. */
+const DATA = [
+ {id:"setelah-sholat", stage:"Setelah Sholat", title:"Doa Setelah Sholat Fardhu",
+  note:"Urutan dari postingan @tausiah.muslimah (\"Day 1 ngafalin doa sholat\").", doas:[
+  {t:"1. Pujian & Mengagungkan Allah", src:"Doa yang lazim diamalkan ulama", parts:[{
+    ar:"بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ، اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ، حَمْدًا شَاكِرِيْنَ، حَمْدًا نَاعِمِيْنَ، حَمْدًا يُوَافِيْ نِعَمَهُ وَيُكَافِئُ مَزِيْدَهُ، يَا رَبَّنَا لَكَ الْحَمْدُ كَمَا يَنْبَغِيْ لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ",
+    lat:"Bismillahirrahmanirrahim, alhamdulillahi rabbil 'alamin, hamdan syakirin, hamdan na'imin, hamdan yuwafi ni'amahu wa yukafi'u mazidah, ya rabbana lakal hamdu kama yanbaghi li jalali wajhika wa 'azhimi sulthanik.",
+    tr:"Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang. Segala puji bagi Allah, Tuhan semesta alam, dengan pujian orang-orang yang bersyukur dan orang-orang yang diberi nikmat, pujian yang sepadan dengan nikmat-Nya dan menjamin tambahannya. Wahai Tuhan kami, bagi-Mu segala puji sebagaimana layaknya bagi keagungan wajah-Mu dan kebesaran kekuasaan-Mu."}]},
+  {t:"2. Sholawat Nabi", parts:[{
+    ar:"اَللّٰهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِ سَيِّدِنَا مُحَمَّدٍ",
+    lat:"Allahumma sholli wa sallim 'ala sayyidina Muhammad wa 'ala ali sayyidina Muhammad.",
+    tr:"Ya Allah, limpahkanlah shalawat dan salam kepada junjungan kami Nabi Muhammad dan kepada keluarga junjungan kami Nabi Muhammad."}]},
+  {t:"3. Doa Selamat Dunia Akhirat", src:"NU Online – Doa Selamat Dunia Akhirat", parts:[{
+    ar:"اَللّٰهُمَّ إِنَّا نَسْأَلُكَ سَلَامَةً فِي الدِّيْنِ، وَعَافِيَةً فِي الْجَسَدِ، وَزِيَادَةً فِي الْعِلْمِ، وَبَرَكَةً فِي الرِّزْقِ، وَتَوْبَةً قَبْلَ الْمَوْتِ، وَرَحْمَةً عِنْدَ الْمَوْتِ، وَمَغْفِرَةً بَعْدَ الْمَوْتِ",
+    lat:"Allahumma inna nas-aluka salamatan fiddin, wa 'afiyatan fil jasad, wa ziyadatan fil 'ilmi, wa barakatan firrizqi, wa taubatan qablal maut, wa rahmatan 'indal maut, wa maghfiratan ba'dal maut.",
+    tr:"Ya Allah, kami memohon kepada-Mu keselamatan dalam agama, kesehatan badan, tambahan ilmu, keberkahan rezeki, taubat sebelum mati, rahmat ketika mati, dan ampunan setelah mati."}]},
+  {t:"4. Doa Ringan di Sakaratul Maut", src:"NU Online – lanjutan Doa Selamat Dunia Akhirat", parts:[{
+    ar:"اَللّٰهُمَّ هَوِّنْ عَلَيْنَا فِيْ سَكَرَاتِ الْمَوْتِ، وَالنَّجَاةَ مِنَ النَّارِ، وَالْعَفْوَ عِنْدَ الْحِسَابِ",
+    lat:"Allahumma hawwin 'alaina fi sakaratil maut, wan najata minan nar, wal 'afwa 'indal hisab.",
+    tr:"Ya Allah, mudahkanlah kami dalam menghadapi sakaratul maut, selamatkan kami dari api neraka, dan berilah ampunan ketika hisab (perhitungan amal)."}]},
+  {t:"5. Doa Nabi Adam & Minta Teguh di Jalan Allah", src:"QS Al-A'raf: 23 + QS Ali 'Imran: 8", parts:[{
+    ar:"رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُوْنَنَّ مِنَ الْخَاسِرِيْنَ، رَبَّنَا لَا تُزِغْ قُلُوْبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ",
+    lat:"Rabbana zhalamna anfusana wa illam taghfir lana wa tarhamna lanakunanna minal khasirin. Rabbana la tuzigh qulubana ba'da idz hadaitana wa hab lana min ladunka rahmah, innaka antal wahhab.",
+    tr:"Ya Tuhan kami, kami telah menzalimi diri kami sendiri. Jika Engkau tidak mengampuni dan tidak merahmati kami, niscaya kami termasuk orang-orang yang rugi. Ya Tuhan kami, janganlah Engkau jadikan hati kami berpaling setelah Engkau beri kami petunjuk, dan anugerahkanlah kepada kami rahmat dari sisi-Mu. Sesungguhnya Engkau Maha Pemberi."}]},
+  {t:"6. Minta Keluarga Sakinah + Doa Sapu Jagat", src:"QS Al-Furqan: 74 + QS Al-Baqarah: 201", parts:[{
+    ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِيْنَ إِمَامًا، رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    lat:"Rabbana hab lana min azwajina wa dzurriyyatina qurrata a'yun waj'alna lil muttaqina imama. Rabbana atina fiddunya hasanah wa fil akhirati hasanah wa qina 'adzaban nar.",
+    tr:"Ya Tuhan kami, anugerahkanlah kepada kami pasangan dan keturunan sebagai penyejuk mata, dan jadikanlah kami pemimpin bagi orang-orang yang bertakwa. Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, serta lindungilah kami dari azab neraka."}]},
+  {t:"7. Tasbih Penutup", src:"QS As-Saffat: 180–182", parts:[{
+    ar:"سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ، وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ",
+    lat:"Subhana rabbika rabbil 'izzati 'amma yashifun, wa salamun 'alal mursalin, walhamdulillahi rabbil 'alamin.",
+    tr:"Mahasuci Tuhanmu, Tuhan pemilik kemuliaan, dari apa yang mereka sifatkan. Salam sejahtera bagi para rasul. Segala puji bagi Allah, Tuhan semesta alam."}]}
+ ]},
+ {id:"tahajud", stage:"Tahajud", title:"Sholat Tahajud", doas:[
+  {t:"Doa Setelah Sholat Tahajud", w:"Dibaca setelah salam atau setelah selesai seluruh rakaat tahajud.", src:"HR al-Bukhari & Muslim · Al-Adzkar (Imam an-Nawawi) · NU Online", parts:[{
+    ar:"اَللّٰهُمَّ لَكَ الْحَمْدُ أَنْتَ قَيِّمُ السَّمٰوَاتِ وَالْأَرْضِ وَمَنْ فِيْهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ مَلِكُ السَّمٰوَاتِ وَالْأَرْضِ وَمَنْ فِيْهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ نُوْرُ السَّمٰوَاتِ وَالْأَرْضِ وَمَنْ فِيْهِنَّ، وَلَكَ الْحَمْدُ أَنْتَ الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَلِقَاؤُكَ حَقٌّ، وَقَوْلُكَ حَقٌّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالنَّبِيُّوْنَ حَقٌّ، وَمُحَمَّدٌ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ حَقٌّ، وَالسَّاعَةُ حَقٌّ. اَللّٰهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خَاصَمْتُ، وَإِلَيْكَ حَاكَمْتُ، فَاغْفِرْ لِيْ مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّيْ، أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ، لَا إِلٰهَ إِلَّا أَنْتَ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ",
+    lat:"Allâhumma lakal hamdu, anta qayyimus samâwâti wal ardhi wa man fîhinna. Wa lakal hamdu, anta malikus samâwâti wal ardhi wa man fîhinna. Wa lakal hamdu, anta nûrus samâwâti wal ardhi wa man fîhinna. Wa lakal hamdu antal haqq, wa wa'dukal haqq, wa liqâ'uka haqq, wa qauluka haqq, wal jannatu haqq, wan nâru haqq, wan nabiyyûna haqq, wa Muhammadun shallallâhu 'alaihi wa sallama haqq, was sâ'atu haqq. Allâhumma laka aslamtu, wa bika âmantu, wa 'alaika tawakkaltu, wa ilaika anabtu, wa bika khâshamtu, wa ilaika hâkamtu, faghfir lî mâ qaddamtu wa mâ akhkhartu wa mâ asrartu wa mâ a'lantu wa mâ anta a'lamu bihi minnî. Antal muqaddimu wa antal mu'akhkhiru, lâ ilâha illâ anta. Wa lâ haula wa lâ quwwata illâ billâh.",
+    tr:"Ya Allah, segala puji bagi-Mu. Engkaulah penegak langit, bumi, dan semua yang ada di dalamnya. Segala puji bagi-Mu, Engkaulah Raja langit, bumi, dan semua yang ada di dalamnya. Segala puji bagi-Mu, Engkaulah cahaya langit, bumi, dan semua yang ada di dalamnya. Segala puji bagi-Mu, Engkaulah Yang Maha Benar. Janji-Mu benar, pertemuan dengan-Mu benar, firman-Mu benar, surga itu benar, neraka itu benar, para nabi itu benar, Nabi Muhammad SAW itu benar, dan hari Kiamat itu benar. Ya Allah, kepada-Mu aku berserah diri, kepada-Mu aku beriman, kepada-Mu aku bertawakal, kepada-Mu aku kembali, karena-Mu aku berselisih (membela kebenaran), dan kepada-Mu aku meminta keputusan. Maka ampunilah dosaku yang telah lalu dan yang kemudian, yang kusembunyikan dan yang kutampakkan, serta dosa yang Engkau lebih mengetahuinya daripada aku. Engkaulah Yang Maha Mendahulukan dan Engkaulah Yang Maha Mengakhirkan. Tiada Tuhan selain Engkau. Tiada daya dan kekuatan kecuali dengan pertolongan Allah."}]}
+ ]}
+];
+
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const main=document.getElementById("main"), stages=document.getElementById("stages");
+const flat=[];
+DATA.forEach((s,i)=>{
+  const a=document.createElement("a"); a.href="#"+s.id; a.textContent=s.stage; a.dataset.id=s.id; stages.appendChild(a);
+  const sec=document.createElement("section"); sec.className="stage"; sec.id=s.id;
+  let h=`<div class="stage-h"><span class="n">${i+1}</span><h2>${esc(s.title)}</h2></div>`;
+  if(s.note) h+=`<p class="stage-note">${esc(s.note)}</p>`;
+  s.doas.forEach(d=>{
+    const k=flat.length; flat.push(d);
+    h+=`<article class="doa" data-k="${k}"><div class="doa-h"><h3>${esc(d.t)}</h3><button class="copy" data-k="${k}">Salin</button></div>${d.w?`<p class="when">${esc(d.w)}</p>`:""}`;
+    d.parts.forEach(p=>{
+      h+=`<div class="part"><p class="ar" lang="ar">${esc(p.ar)}</p><p class="lat">${esc(p.lat)}</p><p class="tr">“${esc(p.tr)}”</p></div>`;
+    });
+    if(d.src) h+=`<p class="src">Sumber: ${esc(d.src)}</p>`;
+    h+=`</article>`;
+  });
+  sec.innerHTML=h; main.appendChild(sec);
+});
+const empty=document.createElement("p"); empty.className="empty"; empty.textContent="Tidak ada doa yang cocok."; empty.hidden=true; main.appendChild(empty);
+
+// copy button
+main.addEventListener("click",async e=>{
+  const b=e.target.closest(".copy"); if(!b) return;
+  const d=flat[+b.dataset.k];
+  const txt=[d.t,...d.parts.map(p=>`${p.ar}\n\n${p.lat}\n\nArtinya: "${p.tr}"`),d.src?`Sumber: ${d.src}`:""].filter(Boolean).join("\n\n");
+  try{await navigator.clipboard.writeText(txt);b.textContent="Tersalin ✓"}catch(err){b.textContent="Gagal, salin manual"}
+  setTimeout(()=>b.textContent="Salin",1800);
+});
+
+// search
+document.getElementById("q").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase(); let any=false;
+  document.querySelectorAll("section.stage").forEach(sec=>{
+    let vis=0;
+    sec.querySelectorAll(".doa").forEach(el=>{
+      const d=flat[+el.dataset.k];
+      const hay=(d.t+" "+(d.w||"")+" "+(d.src||"")+" "+d.parts.map(p=>p.lat+" "+p.tr).join(" ")).toLowerCase();
+      const ok=!q||hay.includes(q); el.hidden=!ok; if(ok) vis++;
+    });
+    sec.hidden=!vis; if(vis) any=true;
+  });
+  empty.hidden=any;
+});
+
+// settings
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let size=parseFloat(store.get("arSize"))||1.9;
+const applySize=()=>document.documentElement.style.setProperty("--ar-size",size+"rem"); applySize();
+document.getElementById("bPlus").onclick=()=>{size=Math.min(3.2,+(size+0.2).toFixed(1));applySize();store.set("arSize",size)};
+document.getElementById("bMinus").onclick=()=>{size=Math.max(1.3,+(size-0.2).toFixed(1));applySize();store.set("arSize",size)};
+function toggle(btn,cls,key){
+  const set=on=>{btn.setAttribute("aria-pressed",on);document.body.classList.toggle(cls,!on);store.set(key,on?"1":"0")};
+  set(store.get(key)!=="0"); btn.onclick=()=>set(btn.getAttribute("aria-pressed")!=="true");
+}
+toggle(document.getElementById("bLat"),"no-lat","showLat");
+toggle(document.getElementById("bTr"),"no-tr","showTr");
+
+// highlight current category
+const links=[...stages.querySelectorAll("a")];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  links.forEach(l=>l.classList.toggle("on",l.dataset.id===e.target.id));
+}})},{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section.stage").forEach(s=>io.observe(s));
+links[0].classList.add("on");
+</script>
+</body></html>
